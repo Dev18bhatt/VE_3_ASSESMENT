@@ -1,20 +1,32 @@
-# Task Management API
+# Full Stack Task Management Application
 
-This is a simple Task Management API with user authentication and task management features. The API uses `bcrypt` for secure password hashing. Users can create an account, log in, and manage tasks (add, update, delete, and view tasks).
+This project is a full-stack Task Management Application with user authentication, task management, and a responsive UI. The backend is built with Node.js, Express, and MongoDB, while the frontend is built with React, utilizing hooks such as `useState`, `useEffect`, `useContext`, `useNavigate`, and `useParams` for seamless user experience and state management.
 
 ---
 
 ## Features
 
-- **User Authentication**: Register and login with password hashing using `bcrypt`.
-- **Task Management**: Add, retrieve, update, and delete tasks.
-  
+- **User Authentication**: Secure registration and login functionality with password hashing.
+- **Task Management**: Add, view, update, and delete tasks.
+- **Frontend UI**: Interactive UI built with React and modern hooks for state and navigation management.
+- **API Integration**: Smooth communication between frontend and backend using RESTful APIs.
+
+---
+
 ## Technologies Used
 
-- **Node.js**: JavaScript runtime for building the API.
-- **Express.js**: Framework for handling routes and requests.
+### Backend
+
+- **Node.js** and **Express**: For RESTful APIs and handling server requests.
+- **MongoDB**: Database for user and task data storage.
 - **bcrypt**: Password hashing for secure authentication.
-- **MongoDB**: Database for storing user and task data.
+
+### Frontend
+
+- **React**: For building a responsive UI.
+- **React Hooks**: `useState`, `useEffect`, `useContext`, `useNavigate`, `useParams` for managing component state, side effects, and navigation.
+
+---
 
 ## Getting Started
 
@@ -23,100 +35,73 @@ This is a simple Task Management API with user authentication and task managemen
 - [Node.js](https://nodejs.org/) (v14+)
 - [MongoDB](https://www.mongodb.com/) (Local or Cloud instance)
 
-### Installation
+### Backend Setup
 
-1. Clone the repository:
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/your-username/task-management-api.git
    cd task-management-api
-Install dependencies:
+Install backend dependencies:
 
-bash
+
 
 npm install
-Set up environment variables. Create a .env file in the root directory and add the following:
+Set up environment variables. Create a .env file in the root directory:
 
 env
 
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-Start the server:
+Run the backend server:
 
 bash
 
 npm start
-The API will be available at http://localhost:5000.
+Backend is available at http://localhost:5000.
+
+Frontend Setup
+Navigate to frontend folder (assuming the frontend code is in a folder named client):
+
+bash
+
+cd client
+Install frontend dependencies:
+
+bash
+
+npm install
+Start the frontend server:
+
+bash
+
+npm run dev to start the front-end.
+Frontend is available at http://localhost:5173.
 
 API Endpoints
-Authentication
-Register User
-Endpoint: /api/auth/register
-Method: POST
-Body:
-json
+Authentication Endpoints
+Register: POST /api/auth/register
+Login: POST /api/auth/login
+Task Endpoints
+Add Task: POST /api/tasks
+Get Task by ID: GET /api/tasks/:id
+Get All Tasks: GET /api/tasks
+Update Task: PUT /api/tasks/:id
+Delete Task: DELETE /api/tasks/:id
+Frontend Structure
+The frontend is built using React functional components and hooks:
 
-{
-  "username": "string",
-  "password": "string"
-}
-Description: Registers a new user with a hashed password.
-Login User
-Endpoint: /api/auth/login
-Method: POST
-Body:
-json
-
-{
-  "username": "string",
-  "password": "string"
-}
-Description: Authenticates a user and returns a JWT token.
-Task Management
-Add Task
-Endpoint: /api/tasks
-Method: POST
-Headers:
-Authorization: Bearer <JWT Token>
-Body:
-json
-
-{
-  "title": "string",
-  "description": "string"
-}
-Description: Adds a new task for the authenticated user.
-Get Task by ID
-Endpoint: /api/tasks/:id
-Method: GET
-Headers:
-Authorization: Bearer <JWT Token>
-Description: Retrieves a task by its ID.
-Get All Tasks
-Endpoint: /api/tasks
-Method: GET
-Headers:
-Authorization: Bearer <JWT Token>
-Description: Retrieves all tasks for the authenticated user.
-Update Task by ID
-Endpoint: /api/tasks/:id
-Method: PUT
-Headers:
-Authorization: Bearer <JWT Token>
-Body:
-json
-
-{
-  "title": "string",
-  "description": "string"
-}
-Description: Updates a task by its ID.
-Delete Task by ID
-Endpoint: /api/tasks/:id
-Method: DELETE
-Headers:
-Authorization: Bearer <JWT Token>
-Description: Deletes a task by its ID.
-Error Handling
-Each endpoint returns an error message and status code if something goes wrong. Ensure the JWT token is valid for task-related endpoints, as they require user authentication.
-
+Key Hooks
+useState: Manages local component state for form inputs, task lists, etc.
+useEffect: Handles side effects such as fetching data on component load.
+useContext: Manages global state for authentication across the app.
+useNavigate: Programmatic navigation for redirecting users after login, registration, or task updates.
+useParams: Extracts parameters from the URL for task-specific pages (e.g., viewing a task by ID).
+UI Components
+Auth Pages: Registration and login forms with validation.
+Task Management Pages:
+Add Task: Form to add a new task.
+Task List: Displays all tasks.
+Task Detail: Shows task details by ID.
+Edit Task: Form to edit existing tasks.
+Navigation: Responsive routing and conditional rendering based on user authentication.
